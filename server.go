@@ -484,7 +484,7 @@ func (srv *Server) activateAndServe(listener Listener, conn *coapNet.Conn, connU
 
 	switch {
 	case listener != nil:
-		if _, ok := listener.(*coapNet.DTLSListener); ok {
+		if _, ok := listener.(*coapNet.DTLSListener); ok || strings.HasSuffix(srv.Net, "-dtls") {
 			return srv.serveDTLSListener(listener)
 		}
 		return srv.serveTCPListener(listener)
